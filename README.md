@@ -21,7 +21,7 @@ It works on almost any JavaScript runtime and All Web Server Application: Node.j
 
 Fast and lightweight, but not only fast and lightweight.
 
-Cumo is **Static-Site-Generator** and it has *innovative feature* never before offered.
+Cumo is **Static-Site-Generator** and it has *innovative feature*.
 
 Web Framework built on Hono🔥  
 Thanks [Hono](https://github.com/honojs/hono)🔥
