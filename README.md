@@ -21,11 +21,13 @@ It works on almost any JavaScript runtime and All Web Server Application: Node.j
 
 Fast and lightweight, but not only fast and lightweight.
 
-Cumo is **Static-Site-Generator** and it has *innovative feature*.
+Cumo is **Static-Site-Generator** and it has *innovative feature* :)
 
-Dont't think "it's just **Static-Site-Generator** framework".
+Dont't think "it's just **Static-Site-Generator** framework" :(
 
 It could be **VitePress** or minimal **Hono** application.
+
+This framework runs as **SSG**, but also makes use of **Hono**'s super-powerful system :D
 
 <hr />
 
