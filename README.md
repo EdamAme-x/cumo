@@ -6,5 +6,11 @@
 
 <hr />
 
-Web Framework built on Hono🔥
+<p align="center">
+  <p>Coming soon...</p>
+</p>
+
+<hr />
+
+Web Framework built on Hono🔥  
 Thanks [Hono](https://github.com/honojs/hono)🔥
