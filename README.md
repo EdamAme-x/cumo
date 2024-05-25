@@ -16,5 +16,10 @@
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/EdamAme-x/cumo)](https://github.com/EdamAme-x/cumo/pulse)
 [![GitHub last commit](https://img.shields.io/github/last-commit/EdamAme-x/cumo)](https://github.com/EdamAme-x/cumo/commits/main)
 
+Cumo - _**\[雲\] means cloud🌧 in Japanese**_ - is a small, simple, and ultrafast web framework for the Edges.
+It works on almost any JavaScript runtime and All Web Server Application: Node.js, Deno, Bun, Nginx, Apache, etc...
+
+Fast and lightweight, but not only fast and lightweight.
+
 Web Framework built on Hono🔥  
 Thanks [Hono](https://github.com/honojs/hono)🔥
