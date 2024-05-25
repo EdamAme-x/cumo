@@ -27,7 +27,7 @@ Dont't think "it's just **Static-Site-Generator** framework" :(
 
 It could be **VitePress** or minimal **Hono** application.
 
-This framework runs as **SSG**, but also makes use of **Hono**'s super-powerful system :D
+This framework runs as **SSG**, but also you can use **Hono**'s super-powerful system :D
 
 <hr />
 
