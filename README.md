@@ -25,6 +25,8 @@ Cumo is **Static-Site-Generator** and it has *innovative feature*.
 
 Dont't think "it's just **Static-Site-Generator** framework".
 
+It's just as **VitePress**, also as **SSR**.
+
 <hr />
 
 Web Framework built on Hono🔥  
