@@ -12,9 +12,9 @@
 
 <hr />
 
-[![GitHub](https://img.shields.io/github/license/honojs/hono)](https://github.com/honojs/hono/blob/main/LICENSE)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/honojs/hono)](https://github.com/honojs/hono/pulse)
-[![GitHub last commit](https://img.shields.io/github/last-commit/honojs/hono)](https://github.com/honojs/hono/commits/main)
+[![GitHub](https://img.shields.io/github/license/EdamAme-x/cumo)](https://github.com/EdamAme-x/cumo/blob/main/LICENSE)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/EdamAme-x/cumo)](https://github.com/EdamAme-x/cumo/pulse)
+[![GitHub last commit](https://img.shields.io/github/last-commit/EdamAme-x/cumo)](https://github.com/EdamAme-x/cumo/commits/main)
 
 Web Framework built on Hono🔥  
 Thanks [Hono](https://github.com/honojs/hono)🔥
