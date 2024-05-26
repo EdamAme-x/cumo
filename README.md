@@ -7,7 +7,7 @@
 <hr />
 
 <p align="center">
-  <p>Coming soon...</p>
+  <p>Coming soon... (定期テストの終了をお待ち下さい)</p>
 </p>
 
 <hr />
