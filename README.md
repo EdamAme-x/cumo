@@ -21,7 +21,7 @@ It works on almost any JavaScript runtime and All Web Server Application: Node.j
 
 Fast and lightweight, but not only fast and lightweight.
 
-Cumo is **Hybrid**.
+Cumo is **Hybrid** and **PPR**(Partial Pre-Rendering).
 
 ## Features
 - Lightweight
