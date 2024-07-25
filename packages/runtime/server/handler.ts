@@ -7,6 +7,9 @@ import {
 import type { Env, BlankSchema } from "@hono/hono/types";
 import { createRoutes, getRoutes } from "./utils/createRoutes.ts";
 import { join } from "node:path";
+import { default as _process } from "node:process";
+
+
 
 export class ServerHandler<E extends Env = any, B extends string = "/"> {
   public hono: Hono<E, BlankSchema, B>;
@@ -14,7 +17,7 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
 
   constructor(
     serverConfig: ServerConfig<E, B> = {
-      baseDir: process.cwd(),
+      baseDir: _process.cwd(),
     }
   ) {
     const internalServerConfig = {

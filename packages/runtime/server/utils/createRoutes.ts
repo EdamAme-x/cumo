@@ -93,7 +93,7 @@ export function createRoutes<B extends string>(
   });
 }
 
-export async function getRoutes(dir, files: string[] = []) {
+export async function getRoutes(dir: string, files: string[] = []) {
   const paths = await fs.promises.readdir(dir);
   const dirs: string[] = [];
   for (const path of paths) {
