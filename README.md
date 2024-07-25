@@ -27,7 +27,6 @@ Cumo is **RSR** (Realtime Server Rendering).
 - Lightweight
 - Fast
 - Realtime
-- NoClient
 
 <hr />
 
