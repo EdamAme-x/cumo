@@ -25,7 +25,9 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
     this.hono =
       serverConfig.baseApp ||
       new Hono<E, BlankSchema, B>({
-        ...serverConfig,
+        strict: serverConfig.strict,
+        router: serverConfig.router,
+        getPath: serverConfig.getPath,
       });
 
     if (serverConfig.basePath) {

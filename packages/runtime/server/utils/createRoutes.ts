@@ -47,7 +47,7 @@ function parseHandlerPath(parentPath: string, routeName: string): string {
     .replace(REGEXP_INDEX_ROUTE, "")
     .replace(REGEXP_EXT_ROUTE, "");
 
-  return [...parsedParentPath, parsedRouteName].join("/");
+  return [...parsedParentPath, parsedParentPath[parsedParentPath.length - 1] === "*" ? null : parsedRouteName].filter(Boolean).join("/");
 }
 
 function getPathData(path: string) {
