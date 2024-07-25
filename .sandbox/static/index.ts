@@ -1,6 +1,6 @@
-import { ServerHandler } from "../../packages/runtime/server/handler";
+import { Cumo } from "../../packages/runtime/mod";
 
-const s = new ServerHandler();
+const s = new Cumo();
 
 await s.registerRoutes("./routes");
 
