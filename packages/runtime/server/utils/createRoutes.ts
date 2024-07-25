@@ -70,7 +70,6 @@ export function createRoutes<B extends string>(
 
     return {
       name: fileName,
-      rootPath: rotuesPath,
       parentPath,
     };
   });
@@ -82,7 +81,7 @@ export function createRoutes<B extends string>(
         route.name
       ),
       modulePath: normlizePath(
-        join(normlizePath(route.rootPath, false), route.name)
+        join(normlizePath(route.parentPath, false), route.name)
       ),
       isNotFound: new RegExp(
         `${config.notFoundPattern}\.(${EXTENSIONS.join("|")})$`

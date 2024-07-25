@@ -45,9 +45,9 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
 
     for (let i = 0, len = routes.length; i < len; i++) {
       const route = routes[i];
+      const module = await getModule(route.modulePath);
 
       if (route.isNotFound) {
-        const module = await getModule(route.modulePath);
 
         this.hono.notFound((c) => {
           const method = c.req.method;
@@ -62,7 +62,6 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
         });
         continue;
       } else if (route.isError) {
-        const module = await getModule(route.modulePath);
 
         this.hono.onError((err, c) => {
           const method = c.req.method;
@@ -78,10 +77,9 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
         continue;
       }
 
-      const module = await getModule(route.modulePath);
-
       this.hono.all(route.handlerPath, (c) => {
         const method = c.req.method;
+
         if (module[method]) {
           return module[method](c);
         }
