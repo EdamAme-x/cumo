@@ -7,7 +7,7 @@
 <hr />
 
 <p align="center">
-  <p>Coming soon... (定期テストの終了をお待ち下さい)</p>
+ 
 </p>
 
 <hr />
@@ -21,7 +21,7 @@ It works on almost any JavaScript runtime.
 
 Fast and lightweight, but not only fast and lightweight.
 
-Cumo is **ServerRealtimeRender** and Framework of **PPR**(Partial Pre-Rendering / Optional).
+Cumo is **RSR** (Realtime Server Rendering).
 
 ## Features
 - Lightweight
