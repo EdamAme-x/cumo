@@ -4,6 +4,7 @@
     "version": "0.0.0",
     "exports": {
         ".": "./packages/runtime/mod.ts",
-        "./runtime": "./packages/runtime/mod.ts"
+        "./runtime": "./packages/runtime/mod.ts",
+        "./hooks": "./packages/hooks/mod.ts"
     }
 }
