@@ -17,16 +17,17 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/EdamAme-x/cumo)](https://github.com/EdamAme-x/cumo/commits/main)
 
 Cumo - _**\[雲\] means cloud🌧 in Japanese**_ - is a lightweight, simple, and ultrafast web framework for anyone.  
-It works on almost any JavaScript runtime and All Web Server Application: Node.js, Deno, Bun, Nginx, Apache, etc...
+It works on almost any JavaScript runtime.
 
 Fast and lightweight, but not only fast and lightweight.
 
-Cumo is **Hybrid** and Framework of **PPR**(Partial Pre-Rendering / Optional).
+Cumo is **ServerRealtimeRender** and Framework of **PPR**(Partial Pre-Rendering / Optional).
 
 ## Features
 - Lightweight
 - Fast
-- Hybrid
+- Realtime
+- NoClient
 
 <hr />
 
