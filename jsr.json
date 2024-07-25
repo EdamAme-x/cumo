@@ -1,0 +1,8 @@
+{
+    "$schema": "https://jsr.io/schema/config-file.v1.json",
+    "name": "@evex/cumo",
+    "version": "0.0.0",
+    "exports": {
+        ".": "./packages/runtime/mod.ts"
+    }
+}
