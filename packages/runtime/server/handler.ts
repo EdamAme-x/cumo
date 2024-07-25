@@ -42,7 +42,7 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
     const routes = createRoutes(allRoutes, this.config, rotuesPath);
 
     const getModule = async (modulePath: string) => {
-      return await import(join(this.config.baseDir, modulePath));
+      return await ((path: string) => import(path))(join(this.config.baseDir, modulePath));
     };
 
     for (let i = 0, len = routes.length; i < len; i++) {
