@@ -6,7 +6,7 @@ import {
 } from "./server-config.ts";
 import type { Env, BlankSchema } from "@hono/hono/types";
 import { createRoutes, getRoutes } from "./utils/createRoutes.ts";
-import { join } from "path";
+import { join } from "node:path";
 
 export class ServerHandler<E extends Env = any, B extends string = "/"> {
   public hono: Hono<E, BlankSchema, B>;
