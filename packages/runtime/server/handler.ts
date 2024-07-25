@@ -94,7 +94,7 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
     }
   }
 
-  public createHandler() {
+  public createHandler(): (req: Request, ...args: any[]) => Response | Promise<Response> {
     return (req: Request, ...args: any[]) => this.hono.fetch(req, ...args);
   }
 }
