@@ -3,7 +3,20 @@
   "version": "0.0.0",
   "private": false,
   "license": "MIT",
+  "scripts": {
+    "format": "prettier --write ./packages/**/*.{ts}"
+  },
   "dependencies": {
     "@hono/hono": "npm:@jsr/hono__hono"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "prettier": "^3.3.3"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true
   }
 }

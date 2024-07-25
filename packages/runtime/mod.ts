@@ -1,4 +1,4 @@
 /**
- * Empty
+ * Runtime of Cumo
  * @module
  */

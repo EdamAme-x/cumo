@@ -17,7 +17,6 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/EdamAme-x/cumo)](https://github.com/EdamAme-x/cumo/commits/main)
 
 Cumo - _**\[雲\] means cloud🌧 in Japanese**_ - is a lightweight, simple, and ultrafast web framework for anyone.  
-It works on almost any JavaScript runtime.
 
 Fast and lightweight, but not only fast and lightweight.
 
@@ -28,6 +27,7 @@ Cumo is **RSR** (Realtime Server Rendering).
 - Fast
 - Realtime
 - No Build
+- Use Server Extensions (Logger, Custom Handler)
 
 <hr />
 
