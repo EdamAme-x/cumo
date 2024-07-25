@@ -1,1 +1,1 @@
-export { ServerHandler as Cumo } from "./server/handler";
+export { ServerHandler as Cumo } from "./server/handler.ts";

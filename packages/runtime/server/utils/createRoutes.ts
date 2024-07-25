@@ -1,4 +1,4 @@
-import { InternalServerConfig } from "../server-config";
+import { InternalServerConfig } from "../server-config.ts";
 import { join } from "node:path";
 import * as fs from "node:fs";
 

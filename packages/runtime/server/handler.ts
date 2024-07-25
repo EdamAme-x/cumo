@@ -3,9 +3,9 @@ import {
   BASE_CONFIG,
   InternalServerConfig,
   type ServerConfig,
-} from "./server-config";
+} from "./server-config.ts";
 import type { Env, BlankSchema } from "@hono/hono/types";
-import { createRoutes, getRoutes } from "./utils/createRoutes";
+import { createRoutes, getRoutes } from "./utils/createRoutes.ts";
 import { join } from "path";
 
 export class ServerHandler<E extends Env = any, B extends string = "/"> {
