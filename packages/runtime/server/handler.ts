@@ -1,22 +1,24 @@
 import { type ExecutionContext, Hono } from "@hono/hono";
 import { BASE_CONFIG, InternalServerConfig, type ServerConfig } from "./server-config";
 import type { Env, BlankSchema } from "@hono/hono/types";
-import * as fs from "node:fs";
 import { createRoutes, getRoutes } from "./utils/createRoutes";
+import { join } from "path";
 
 export class ServerHandler<E extends Env = any, B extends string = "/"> {
   public hono: Hono<E, BlankSchema, B>;
   private config: InternalServerConfig<E, B>;
 
-  constructor(serverConfig: ServerConfig<E, B> = {}) {
+  constructor(serverConfig: ServerConfig<E, B> = {
+    baseDir: process.cwd(),
+  }) {
     const internalServerConfig = {
       ...BASE_CONFIG,
       ...serverConfig,
     } as InternalServerConfig<E, B>;
 
     this.hono =
-      serverConfig.baseApp ??
-      new Hono<E>({
+      serverConfig.baseApp ||
+      new Hono<E, BlankSchema, B>({
         ...serverConfig,
       });
 
@@ -31,11 +33,15 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
     const allRoutes = await getRoutes(rotuesPath);
     const routes = createRoutes(allRoutes, this.config);
 
+    const getModule = async (modulePath: string) => {
+        return await import(join(this.config.baseDir, modulePath));
+    }
+
     for (let i = 0, len = routes.length; i < len; i++) {
         const route = routes[i];
 
         if (route.isNotFound) {
-            const module = await import(route.modulePath);
+            const module = await getModule(route.modulePath);
 
             this.hono.notFound((c) => {
                 const method = c.req.method;
@@ -46,7 +52,7 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
             });
             continue;
         }else if (route.isError) {
-            const module = await import(route.modulePath);
+            const module = await getModule(route.modulePath);
 
             this.hono.onError((err, c) => {
                 const method = c.req.method;
@@ -58,7 +64,7 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
             continue;
         }
 
-        const module = await import(route.modulePath);
+        const module = await getModule(route.modulePath);
 
         this.hono.all(route.handlerPath, (c) => {
             const method = c.req.method;
@@ -70,7 +76,7 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
     }
   }
 
-  public handler(req: Request, env?: E, executionCtx?: ExecutionContext): Response | Promise<Response> {
-    return this.hono.fetch(req, env, executionCtx);
+  public createHandler() {
+    return (req: Request, ...args: any[]) => this.hono.fetch(req, ...args);
   }
 }

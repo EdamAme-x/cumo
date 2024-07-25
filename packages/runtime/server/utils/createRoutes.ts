@@ -4,11 +4,11 @@ import { join } from "node:path";
 import * as fs from "node:fs";
 
 
-const EXTENSIONS = [".ts", ".tsx", ".js", ".jsx"];
+const EXTENSIONS = ["ts", "tsx", "js", "jsx"];
 
 function filterRoutes(routes: Dirent[]): Dirent[] {
     return routes.filter((route) => {
-        return EXTENSIONS.some((ext) => route.name.endsWith(ext)) && !route.isDirectory();
+        return EXTENSIONS.some((ext) => route.name.endsWith("." + ext)) && !route.isDirectory();
     });
 }
 
@@ -49,13 +49,12 @@ export function createRoutes<B extends string>(routes: Dirent[], config: Interna
 
     return filteredRoutes
         .map((route) => {
-            // @ts-expect-error EXPERIMENTAL
             const parentPath = normlizePath(route.parentPath);
 
             return {
                 parentPath,
                 handlerPath: parseHandlerPath(parentPath, route.name),
-                modulePath:  join(parentPath, route.name),
+                modulePath:  normlizePath(join(parentPath, route.name)),
                 isNotFound: new RegExp(`${config.notFoundPattern}\.(${EXTENSIONS.join("|")})$`).test(route.name),
                 isError: new RegExp(`${config.serverErrorPattern}\.(${EXTENSIONS.join("|")})$`).test(route.name),
             }
@@ -65,7 +64,6 @@ export function createRoutes<B extends string>(routes: Dirent[], config: Interna
 export async function getRoutes(rotuesPath: string): Promise<Dirent[]> {
     return await fs.promises.readdir(rotuesPath, {
         withFileTypes: true,
-        // @ts-expect-error EXPERIMENTAL
         recursive: true
     })
 }
