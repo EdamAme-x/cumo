@@ -17,7 +17,10 @@ export interface ServerConfig<E extends Env = any, B extends string = "/">
   baseDir: string;
 }
 
-export interface InternalServerConfig<E extends Env = any, B extends string = "/"> extends ServerConfig<E, B> {
+export interface InternalServerConfig<
+  E extends Env = any,
+  B extends string = "/",
+> extends ServerConfig<E, B> {
   baseApp: Hono<E, BlankSchema, B>;
   basePath: B;
   notFoundPattern: string;
