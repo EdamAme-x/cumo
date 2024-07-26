@@ -5,7 +5,7 @@ import {
   type ServerConfig,
 } from "./server-config.ts";
 import type { Env, BlankSchema } from "@hono/hono/types";
-import { createRoutes, getRoutes } from "./utils/createRoutes.ts";
+import { createRoutes, getRoutes } from "./utils/create-routes.ts";
 import { join } from "node:path";
 
 export class ServerHandler<E extends Env = any, B extends string = "/"> {
@@ -66,10 +66,10 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
         this.hono.onError((err, c) => {
           const method = c.req.method;
           if (module[method]) {
-            return module[method](c);
+            return module[method](c, err);
           }
           if (module.default) {
-            return module.default(c);
+            return module.default(c, err);
           }
 
           return c.notFound();
