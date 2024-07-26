@@ -1,13 +1,13 @@
 <div align="center">
   <a href="/">
-    <img src="/.github/assets/Cumo-logo.png" height="300" height="auto" alt="Cumo"/>
+    <img src="https://raw.githubusercontent.com/EdamAme-x/cumo/main/.github/assets/Cumo-logo.png" height="300" height="auto" alt="Cumo"/>
   </a>
 </div>
 
 <hr />
 
 <p align="center">
- 
+  Develop now
 </p>
 
 <hr />
