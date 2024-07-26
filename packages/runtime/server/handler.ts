@@ -35,7 +35,7 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
     this.config = internalServerConfig;
   }
 
-  public async registerRoutes(rotuesPath: string) {
+  public async registerRoutes(rotuesPath: string): Promise<this> {
     const allRoutes = await getRoutes(rotuesPath);
     const routes = createRoutes(allRoutes, this.config, rotuesPath);
 
