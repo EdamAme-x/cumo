@@ -12,6 +12,7 @@
     "@hono/hono": "npm:@jsr/hono__hono"
   },
   "scripts": {
+    "dev": "bun run --watch index.ts --dev",
     "start": "bun run index.ts"
   }
 }

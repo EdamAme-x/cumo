@@ -28,7 +28,9 @@ export interface InternalServerConfig<E extends Env, B extends string>
 export type Extension<E extends Env = any, B extends string = string> = {
   bootstrap?: (config: InternalServerConfig<E, B>) => void;
   setup?: (hono: Hono<E, BlankSchema, B>) => void;
-  register?: (route: {
-    type: "start" | "end";
-  } & Route) => void;
+  register?: (
+    route: {
+      type: "start" | "end";
+    } & Route
+  ) => void;
 };

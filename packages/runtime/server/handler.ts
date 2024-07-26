@@ -10,7 +10,7 @@ import { join } from "node:path";
 
 /**
  * @description Server Handler of Cumo
- * 
+ *
  * @param serverConfig Server Config
  * @param serverConfig.basePath Base Path (default: '/')
  * @param serverConfig.baseApp Base Hono App
@@ -88,12 +88,13 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
 
       const module = await getModule(route.modulePath);
 
-      registerExtensions.forEach((extension) => {
+      for (let i = 0, len = registerExtensions.length; i < len; i++) {
+        const extension = registerExtensions[i];
         extension.register!({
           type: "start",
           ...route,
         });
-      });
+      }
 
       if (route.isNotFound) {
         this.hono.notFound((c) => {
@@ -136,12 +137,13 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
         return c.notFound();
       });
 
-      registerExtensions.forEach((extension) => {
+      for (let i = 0, len = registerExtensions.length; i < len; i++) {
+        const extension = registerExtensions[i];
         extension.register!({
           type: "end",
           ...route,
         });
-      });
+      }
     }
 
     return this;

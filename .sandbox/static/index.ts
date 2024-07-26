@@ -1,6 +1,13 @@
 import { Cumo } from "../../packages/runtime/mod";
+import { HotReload } from './../../packages/extensions/hot-reload/mod';
 
-const s = new Cumo();
+const s = new Cumo({
+    extensions: [
+        HotReload({
+            dev: Bun.argv[2] === "--dev",
+        })
+    ],
+});
 
 s.hono.get("/raw", (c) => {
     return c.text("Hello, World!");
