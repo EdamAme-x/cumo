@@ -28,7 +28,7 @@ Cumo is **ISSR** (Interactive Server-side rendering).
 ## Features
 - Lightweight
 - Fast
-- Realtime
+- Interactive
 - No Build
 - Use Server Extensions (Logger, Custom Handler)
 
