@@ -7,7 +7,7 @@ import { Hono } from "@hono/hono";
  * @param options.interval Interval of detect change
  * @param options.dev Development mode (Please set false in production by args (e.x. --dev))
  */
-export function HotReload(options?: { interval?: number, dev: boolean }) {
+export function HotReload(options?: { interval?: number, dev: boolean }): Extension {
   const { interval = 500, dev = true } = options || {};
 
   return {
