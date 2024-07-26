@@ -23,7 +23,7 @@ Cumo - _**\[雲\] means cloud🌧 in Japanese**_ - is a lightweight, simple, and
 
 Fast and lightweight, but not only fast and lightweight.
 
-Cumo is **RSR** (Realtime Server Rendering).
+Cumo is **ISSR** (Interactive Server-side rendering).
 
 ## Features
 - Lightweight
