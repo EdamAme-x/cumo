@@ -47,7 +47,16 @@ function parseHandlerPath(parentPath: string, routeName: string): string {
     .replace(REGEXP_INDEX_ROUTE, "")
     .replace(REGEXP_EXT_ROUTE, "");
 
-  return [...parsedParentPath, parsedParentPath[parsedParentPath.length - 1] === "*" ? null : parsedRouteName === "" ? null : parsedRouteName].filter(path => path !== null).join("/");
+  return [
+    ...parsedParentPath,
+    parsedParentPath[parsedParentPath.length - 1] === "*"
+      ? null
+      : parsedRouteName === ""
+        ? null
+        : parsedRouteName,
+  ]
+    .filter((path) => path !== null)
+    .join("/");
 }
 
 function getPathData(path: string) {
@@ -110,7 +119,7 @@ export async function getRoutes(dir: string, files: string[] = []) {
   return files;
 }
 
-interface Route {
+export interface Route {
   handlerPath: string;
   modulePath: string;
   isNotFound: boolean;

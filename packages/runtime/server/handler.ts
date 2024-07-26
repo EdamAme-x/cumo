@@ -12,13 +12,22 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
   public hono: Hono<E, BlankSchema, B>;
   private config: InternalServerConfig<E, B>;
 
-  constructor(
-    serverConfig?: ServerConfig<E, B>
-  ) {
-    const internalServerConfig = {
+  constructor(serverConfig?: ServerConfig<E, B>) {
+    let internalServerConfig = {
       ...BASE_CONFIG,
       ...serverConfig,
     } as InternalServerConfig<E, B>;
+
+    for (
+      let i = 0, len = internalServerConfig.extensions.length;
+      i < len;
+      i++
+    ) {
+      const extension = internalServerConfig.extensions[i];
+      if (extension.bootstrap) {
+        extension.bootstrap(internalServerConfig);
+      }
+    }
 
     this.hono =
       internalServerConfig.baseApp ||
@@ -32,6 +41,17 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
       this.hono = this.hono.basePath(internalServerConfig.basePath);
     }
 
+    for (
+      let i = 0, len = internalServerConfig.extensions.length;
+      i < len;
+      i++
+    ) {
+      const extension = internalServerConfig.extensions[i];
+      if (extension.setup) {
+        extension.setup(this.hono);
+      }
+    }
+
     this.config = internalServerConfig;
   }
 
@@ -40,15 +60,28 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
     const routes = createRoutes(allRoutes, this.config, rotuesPath);
 
     const getModule = async (modulePath: string) => {
-      return await ((path: string) => import(path))(join(this.config.baseDir, modulePath));
+      return await ((path: string) => import(path))(
+        join(this.config.baseDir, modulePath)
+      );
     };
+
+    const registerExtensions = this.config.extensions.filter((extension) => {
+      return extension.register;
+    });
 
     for (let i = 0, len = routes.length; i < len; i++) {
       const route = routes[i];
+
       const module = await getModule(route.modulePath);
 
-      if (route.isNotFound) {
+      registerExtensions.forEach((extension) => {
+        extension.register!({
+          type: "start",
+          ...route,
+        });
+      });
 
+      if (route.isNotFound) {
         this.hono.notFound((c) => {
           const method = c.req.method;
           if (module[method]) {
@@ -62,7 +95,6 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
         });
         continue;
       } else if (route.isError) {
-
         this.hono.onError((err, c) => {
           const method = c.req.method;
           if (module[method]) {
@@ -89,12 +121,22 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
 
         return c.notFound();
       });
+
+      registerExtensions.forEach((extension) => {
+        extension.register!({
+          type: "end",
+          ...route,
+        });
+      });
     }
 
     return this;
   }
 
-  public createHandler(): (req: Request, ...args: any[]) => Response | Promise<Response> {
+  public createHandler(): (
+    req: Request,
+    ...args: any[]
+  ) => Response | Promise<Response> {
     return (req: Request, ...args: any[]) => this.hono.fetch(req, ...args);
   }
 }
