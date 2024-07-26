@@ -23,16 +23,16 @@ Cumo - _**\[雲\] means cloud🌧 in Japanese**_ - is a lightweight, simple, and
 
 Fast and lightweight, but not only fast and lightweight.
 
-Cumo is **RSR** (Realtime Server Rendering).
+Cumo is **ISSR** (Interactive Server-side rendering).
 
 ## Features
 - Lightweight
 - Fast
-- Realtime
+- Interactive
 - No Build
 - Use Server Extensions (Logger, Custom Handler)
 
 <hr />
 
 Web Framework built on Hono🔥  
-Thanks [Hono](https://github.com/honojs/hono)🔥
+Thanks [Hono](https://github.com/honojs/hono)🔥 and [ASP.NET blazor](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#enable-support-for-interactive-render-modes)❄
