@@ -1,4 +1,4 @@
-import { type ExecutionContext, Hono } from "@hono/hono";
+import { Hono } from "@hono/hono";
 import {
   BASE_CONFIG,
   InternalServerConfig,
@@ -7,18 +7,13 @@ import {
 import type { Env, BlankSchema } from "@hono/hono/types";
 import { createRoutes, getRoutes } from "./utils/createRoutes.ts";
 import { join } from "node:path";
-import { default as _process } from "node:process";
-
-
 
 export class ServerHandler<E extends Env = any, B extends string = "/"> {
   public hono: Hono<E, BlankSchema, B>;
   private config: InternalServerConfig<E, B>;
 
   constructor(
-    serverConfig: ServerConfig<E, B> = {
-      baseDir: _process.cwd(),
-    }
+    serverConfig?: ServerConfig<E, B>
   ) {
     const internalServerConfig = {
       ...BASE_CONFIG,
@@ -26,15 +21,15 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
     } as InternalServerConfig<E, B>;
 
     this.hono =
-      serverConfig.baseApp ||
+      internalServerConfig.baseApp ||
       new Hono<E, BlankSchema, B>({
-        strict: serverConfig.strict,
-        router: serverConfig.router,
-        getPath: serverConfig.getPath,
+        strict: internalServerConfig.strict,
+        router: internalServerConfig.router,
+        getPath: internalServerConfig.getPath,
       });
 
-    if (serverConfig.basePath) {
-      this.hono = this.hono.basePath(serverConfig.basePath);
+    if (internalServerConfig.basePath) {
+      this.hono = this.hono.basePath(internalServerConfig.basePath);
     }
 
     this.config = internalServerConfig;
@@ -95,6 +90,8 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
         return c.notFound();
       });
     }
+
+    return this;
   }
 
   public createHandler(): (req: Request, ...args: any[]) => Response | Promise<Response> {
