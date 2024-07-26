@@ -2,11 +2,11 @@ import { Cumo } from "../../packages/runtime/mod";
 
 const s = new Cumo();
 
-await s.registerRoutes("./routes");
-
 s.hono.get("/raw", (c) => {
     return c.text("Hello, World!");
 });
+
+await s.registerRoutes("./routes");
 
 console.log(s.hono.routes)
 
