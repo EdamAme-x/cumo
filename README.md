@@ -35,4 +35,4 @@ Cumo is **ISSR** (Interactive Server-side rendering).
 <hr />
 
 Web Framework built on Hono🔥  
-Thanks [Hono](https://github.com/honojs/hono)🔥
+Thanks [Hono](https://github.com/honojs/hono)🔥 and [ASP.NET blazor](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#enable-support-for-interactive-render-modes)❄
