@@ -15,6 +15,9 @@
 [![GitHub](https://img.shields.io/github/license/EdamAme-x/cumo)](https://github.com/EdamAme-x/cumo/blob/main/LICENSE)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/EdamAme-x/cumo)](https://github.com/EdamAme-x/cumo/pulse)
 [![GitHub last commit](https://img.shields.io/github/last-commit/EdamAme-x/cumo)](https://github.com/EdamAme-x/cumo/commits/main)
+<a href="https://jsr.io/@evex/cumo">
+  <img src="https://jsr.io/badges/@evex/cumo" alt="cumo" />
+</a>
 
 Cumo - _**\[雲\] means cloud🌧 in Japanese**_ - is a lightweight, simple, and ultrafast web framework for anyone.  
 
