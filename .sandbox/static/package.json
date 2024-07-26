@@ -1,0 +1,17 @@
+{
+  "name": "static",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@hono/hono": "npm:@jsr/hono__hono"
+  },
+  "scripts": {
+    "start": "bun run index.ts"
+  }
+}

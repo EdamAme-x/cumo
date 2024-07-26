@@ -1,7 +1,7 @@
 import { Hono } from "@hono/hono";
 import {
   BASE_CONFIG,
-  InternalServerConfig,
+  type InternalServerConfig,
   type ServerConfig,
 } from "./server-config.ts";
 import type { Env, BlankSchema } from "@hono/hono/types";

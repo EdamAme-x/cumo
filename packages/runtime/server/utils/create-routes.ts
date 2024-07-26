@@ -1,4 +1,4 @@
-import { InternalServerConfig } from "../server-config.ts";
+import type { InternalServerConfig } from "../server-config.ts";
 import { join } from "node:path";
 import * as fs from "node:fs";
 
@@ -18,8 +18,8 @@ const REGEXP_NO_ROUTE = /^\([a-zA-Z0-9-_]+\)$/;
 const REGEXP_PARAM_ROUTE = /^\[[a-zA-Z0-9-_]+\]$/;
 const REGEXP_ALL_ROUTE = /^\[\.\.\.[a-zA-Z0-9-_]+\]$/;
 
-const REGEXP_INDEX_ROUTE = new RegExp(`^index\.${EXTENSIONS.join("|")}$`);
-const REGEXP_EXT_ROUTE = new RegExp(`\.(${EXTENSIONS.join("|")})$`);
+const REGEXP_INDEX_ROUTE = new RegExp(`^index\.[a-zA-Z0-9-_]+$`);
+const REGEXP_EXT_ROUTE = new RegExp(`\.[a-zA-Z0-9-_]+$`);
 
 function parseHandlerPath(parentPath: string, routeName: string): string {
   const parsedParentPath = parentPath
@@ -47,7 +47,7 @@ function parseHandlerPath(parentPath: string, routeName: string): string {
     .replace(REGEXP_INDEX_ROUTE, "")
     .replace(REGEXP_EXT_ROUTE, "");
 
-  return [...parsedParentPath, parsedParentPath[parsedParentPath.length - 1] === "*" ? null : parsedRouteName].filter(Boolean).join("/");
+  return [...parsedParentPath, parsedParentPath[parsedParentPath.length - 1] === "*" ? null : parsedRouteName === "" ? null : parsedRouteName].filter(path => path !== null).join("/");
 }
 
 function getPathData(path: string) {

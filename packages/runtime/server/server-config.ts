@@ -22,11 +22,4 @@ export interface ServerConfig<E extends Env = any, B extends string = "/">
 export interface InternalServerConfig<
   E extends Env = any,
   B extends string = "/",
-> extends ServerConfig<E, B> {
-  baseApp: Hono<E, BlankSchema, B>;
-  basePath: B;
-  notFoundPattern: string;
-  serverErrorPattern: string;
-  strict: boolean;
-  baseDir: string;
-}
+> extends Required<ServerConfig<E, B>> {}
