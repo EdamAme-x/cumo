@@ -8,6 +8,20 @@ import type { Env, BlankSchema } from "@hono/hono/types";
 import { createRoutes, getRoutes } from "./utils/create-routes.ts";
 import { join } from "node:path";
 
+/**
+ * @description Server Handler of Cumo
+ * 
+ * @param serverConfig Server Config
+ * @param serverConfig.basePath Base Path (default: '/')
+ * @param serverConfig.baseApp Base Hono App
+ * @param serverConfig.baseDir Base Dir (Absolute path) (default: process.cwd())
+ * @param serverConfig.extensions Extensions
+ * @param serverConfig.notFoundPattern Not Found File Pattern (default: 'not-found')
+ * @param serverConfig.serverErrorPattern Server Error File Pattern (default: 'error')
+ * @param serverConfig.strict Strict Mode of Hono (default: false)
+ * @param serverConfig.router Router of Hono
+ * @param serverConfig.getPath Get Path of Hono
+ */
 export class ServerHandler<E extends Env = any, B extends string = "/"> {
   public hono: Hono<E, BlankSchema, B>;
   private config: InternalServerConfig<E, B>;
