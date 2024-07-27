@@ -106,14 +106,19 @@ export function createRoutes<B extends string>(
     .sort(
       (a, b) =>
         b.handlerPath.split("/").length - a.handlerPath.split("/").length
-    )
-    .sort((a, b) =>
+    ).sort((a, b) =>
+      a.handlerPath.split("/").length === b.handlerPath.split("/").length
+        ? (a.handlerPath.split("/").pop() ?? "").startsWith(":")
+          ? 1
+          : 0
+        : 0
+    ).sort((a, b) =>
       a.handlerPath.split("/").length === b.handlerPath.split("/").length
         ? a.handlerPath.endsWith("*")
           ? 1
           : 0
         : 0
-    );
+    )
 }
 
 export async function getRoutes(dir: string, files: string[] = []) {
