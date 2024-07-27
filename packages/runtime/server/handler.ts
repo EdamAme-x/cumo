@@ -108,7 +108,6 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
 
           return c.notFound();
         });
-        continue;
       } else if (route.isError) {
         this.hono.onError((err, c) => {
           const method = c.req.method;
@@ -121,21 +120,20 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
 
           return c.notFound();
         });
-        continue;
+      } else {
+        this.hono.all(route.handlerPath, (c) => {
+          const method = c.req.method;
+
+          if (module[method]) {
+            return module[method](c);
+          }
+          if (module.default) {
+            return module.default(c);
+          }
+
+          return c.notFound();
+        });
       }
-
-      this.hono.all(route.handlerPath, (c) => {
-        const method = c.req.method;
-
-        if (module[method]) {
-          return module[method](c);
-        }
-        if (module.default) {
-          return module.default(c);
-        }
-
-        return c.notFound();
-      });
 
       for (let i = 0, len = registerExtensions.length; i < len; i++) {
         const extension = registerExtensions[i];

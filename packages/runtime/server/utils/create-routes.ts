@@ -47,7 +47,7 @@ function parseHandlerPath(parentPath: string, routeName: string): string {
     .replace(REGEXP_INDEX_ROUTE, "")
     .replace(REGEXP_EXT_ROUTE, "");
 
-  return [
+  const handlerPath = [
     ...parsedParentPath,
     parsedParentPath[parsedParentPath.length - 1] === "*"
       ? null
@@ -57,6 +57,8 @@ function parseHandlerPath(parentPath: string, routeName: string): string {
   ]
     .filter((path) => path !== null)
     .join("/");
+
+  return handlerPath || "/";
 }
 
 function getPathData(path: string) {
