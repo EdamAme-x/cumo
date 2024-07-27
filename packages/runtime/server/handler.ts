@@ -7,6 +7,7 @@ import {
 import type { Env, BlankSchema, BlankEnv, Schema } from "@hono/hono/types";
 import { createRoutes, getRoutes } from "./utils/create-routes.ts";
 import { join } from "node:path";
+import { createContext, createResponse } from "./utils/create-response.ts";
 
 /**
  * @description Server Handler of Cumo
@@ -100,10 +101,10 @@ export class ServerHandler<E extends Env = BlankEnv, B extends string = "/"> {
         this.hono.notFound((c) => {
           const method = c.req.method;
           if (module[method]) {
-            return module[method](c);
+            return createResponse(module[method](createContext(c)));
           }
           if (module.default) {
-            return module.default(c);
+            return createResponse(module.default(createContext(c)));
           }
 
           return c.notFound();
@@ -112,10 +113,10 @@ export class ServerHandler<E extends Env = BlankEnv, B extends string = "/"> {
         this.hono.onError((err, c) => {
           const method = c.req.method;
           if (module[method]) {
-            return module[method](c, err);
+            return createResponse(module[method](createContext(c), err));
           }
           if (module.default) {
-            return module.default(c, err);
+            return createResponse(module.default(createContext(c), err));
           }
 
           return c.notFound();
@@ -125,10 +126,10 @@ export class ServerHandler<E extends Env = BlankEnv, B extends string = "/"> {
           const method = c.req.method;
 
           if (module[method]) {
-            return module[method](c);
+            return createResponse(module[method](createContext(c)));
           }
           if (module.default) {
-            return module.default(c);
+            return createResponse(module.default(createContext(c)));
           }
 
           return c.notFound();

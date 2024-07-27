@@ -22,7 +22,7 @@ export function HotReload(options?: {
         return c.text(id);
       });
 
-      const script = `<!-- HOT-RELOAD-ID:${id} --><script cumo-hot-reload>setInterval(()=>{fetch('/_cumo/extensions/hot-reload').then(r=>r.text()).then(i=>{if(i!=='${id}')location.reload()})},${interval})</script>`;
+      const script = `<!-- HOT-RELOAD:${id} --><script cumo-hot-reload>setInterval(()=>{fetch('/_cumo/extensions/hot-reload').then(r=>r.text()).then(i=>{if(i!=='${id}')location.reload()})},${interval + 4})</script>`;
       hono.use("*", async (c, next) => {
         await next();
         if (c.req.method === "GET") {

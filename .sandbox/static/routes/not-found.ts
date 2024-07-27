@@ -1,5 +1,5 @@
-import type { Context } from "@hono/hono";
+import type { CumoContext, CumoResponse } from "../../../packages/runtime/mod";
 
-export default function NotFound(c: Context) {
+export default function NotFound(c: CumoContext): CumoResponse {
     return c.text("Hello, World! from not-found.ts");
 }

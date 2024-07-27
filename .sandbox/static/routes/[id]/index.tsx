@@ -1,6 +1,6 @@
-import type { Context } from "@hono/hono";
+import type { CumoContext, CumoResponse } from "../../../../packages/runtime/mod";
 
-export function GET(c: Context) {
+export function GET(c: CumoContext): CumoResponse {
     return c.html(<>
         <title>Hello, World!</title>
         <h1>Hello, World! from [id]/index.ts</h1>
