@@ -1,7 +1,7 @@
 import { Hono } from "@hono/hono";
 import type { Env, BlankSchema } from "@hono/hono/types";
 import { default as _process } from "node:process";
-import type { Route } from "./utils/create-routes";
+import type { Route } from "./utils/create-routes.ts";
 
 export const BASE_CONFIG = {
   basePath: "/",
