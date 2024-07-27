@@ -36,6 +36,11 @@ Cumo is **ISSR** (Interactive Server-side rendering).
 
 <img src="https://raw.githubusercontent.com/EdamAme-x/cumo/main/.github/assets/Cumo-image.png" height="300" height="auto" alt="ISSR Images"/>
 
+Place interactive elements (buttons, input boxes), etc.  
+The browser does not do any processing, just receives the input and sends a request to the server. (Cumo handles it appropriately.)  
+The endpoint that receives the request is created by Cumo and handled automatically.
+
+
 <hr />
 
 Web Framework built on Hono🔥  
