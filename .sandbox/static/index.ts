@@ -1,7 +1,6 @@
 import { Cumo } from "../../packages/runtime/mod";
 import { HotReload } from './../../packages/extensions/hot-reload/mod';
 import { PoweredBy } from './../../packages/extensions/powered-by/mod';
-import { RegisterLog } from './../../packages/extensions/register-log/mod';
 
 const s = new Cumo({
     extensions: [
@@ -9,7 +8,6 @@ const s = new Cumo({
             dev: Bun.argv[2] === "--dev",
         }),
         PoweredBy(),
-        RegisterLog()
     ],
 });
 
