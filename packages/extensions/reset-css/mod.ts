@@ -20,7 +20,7 @@ export function ResetCSS(options?: { path?: string }): Extension {
           const contentType = c.res.headers.get("content-type");
           if (contentType && contentType.includes("text/html")) {
             c.res = new Response(
-              `<style cumo-reset-css>${css}</style><!-- RESET-CSS -->${await c.res.text()}`,
+              `<style cumo-reset-css>${css}</style>${await c.res.text()}`,
               {
                 headers: c.res.headers,
                 status: c.res.status,
