@@ -4,6 +4,7 @@ import { HotReload } from './../../packages/extensions/hot-reload/mod';
 import { PoweredBy } from './../../packages/extensions/powered-by/mod';
 import { serveStatic } from '@hono/hono/bun';
 import { ResetCSS } from './../../packages/extensions/reset-css/mod';
+import { RegisterLog } from './../../packages/extensions/register-log/mod';
 
 const app = new Cumo({
     extensions: [
@@ -12,6 +13,7 @@ const app = new Cumo({
             dev: Bun.argv[2] === "--dev",
         }),
         PoweredBy(),
+        RegisterLog()
     ],
 });
 
