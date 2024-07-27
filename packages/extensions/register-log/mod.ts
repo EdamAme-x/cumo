@@ -33,7 +33,7 @@ export function RegisterLog(handler?: registerHandler): Extension {
         if (handler) {
           handler("start", route, currentTime);
         } else {
-          console.log(`[${route.handlerPath}]: \x1b[32mregistering...\x1b[0m`);
+          console.log(`[${route.handlerPath}]: \x1b[34mregistering...\x1b[0m`);
         }
       }
     },
