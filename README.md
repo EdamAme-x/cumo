@@ -34,7 +34,7 @@ Cumo is **ISSR** (Interactive Server-side rendering).
 
 ## What is ISSR (Interactive Server-side rendering)?
 
-<img src="https://raw.githubusercontent.com/EdamAme-x/cumo/main/.github/assets/images/cumo-frame-image.png" height="300" height="auto" alt="ISSR Images"/>
+<img src="https://raw.githubusercontent.com/EdamAme-x/cumo/main/.github/assets/Cumo-image.png" height="300" height="auto" alt="ISSR Images"/>
 
 <hr />
 
