@@ -9,7 +9,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@hono/hono": "npm:@jsr/hono__hono"
+    "@hono/hono": "npm:@jsr/hono__hono@4.5.0"
   },
   "scripts": {
     "dev": "bun run --watch index.ts --dev",

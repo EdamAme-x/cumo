@@ -1,8 +1,10 @@
+import { Hono } from "@hono/hono";
 import { Cumo } from "../../packages/runtime/mod";
 import { HotReload } from './../../packages/extensions/hot-reload/mod';
 import { PoweredBy } from './../../packages/extensions/powered-by/mod';
+import { serveStatic } from '@hono/hono/bun';
 
-const s = new Cumo({
+const app = new Cumo({
     extensions: [
         HotReload({
             dev: Bun.argv[2] === "--dev",
@@ -11,10 +13,18 @@ const s = new Cumo({
     ],
 });
 
-s.hono.get("/raw", (c) => {
+await app.registerRoutes("./routes");
+
+const instance = new Hono();
+
+instance.get("/raw", (c) => {
     return c.text("Hello, World!");
 });
 
-await s.registerRoutes("./routes");
+app.registerInstance("/", instance);
 
-Bun.serve({ port: 3000, fetch: s.createHandler() });
+app.hono.use(serveStatic({
+    root: "./public",
+}))
+
+Bun.serve({ port: 3000, fetch: app.createHandler() });

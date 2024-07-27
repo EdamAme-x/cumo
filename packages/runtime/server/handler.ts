@@ -4,7 +4,7 @@ import {
   type InternalServerConfig,
   type ServerConfig,
 } from "./server-config.ts";
-import type { Env, BlankSchema } from "@hono/hono/types";
+import type { Env, BlankSchema, BlankEnv, Schema } from "@hono/hono/types";
 import { createRoutes, getRoutes } from "./utils/create-routes.ts";
 import { join } from "node:path";
 
@@ -22,8 +22,8 @@ import { join } from "node:path";
  * @param serverConfig.router Router of Hono
  * @param serverConfig.getPath Get Path of Hono
  */
-export class ServerHandler<E extends Env = any, B extends string = "/"> {
-  public hono: Hono<E, BlankSchema, B>;
+export class ServerHandler<E extends Env = BlankEnv, B extends string = "/"> {
+  public hono: Hono<E, Schema, B>;
   private config: InternalServerConfig<E, B>;
 
   constructor(serverConfig?: ServerConfig<E, B>) {
@@ -144,6 +144,11 @@ export class ServerHandler<E extends Env = any, B extends string = "/"> {
       }
     }
 
+    return this;
+  }
+
+  public registerInstance<I extends Hono>(path: string, hono: I): this {
+    this.hono.route(path, hono);
     return this;
   }
 
