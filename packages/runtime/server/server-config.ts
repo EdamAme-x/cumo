@@ -7,6 +7,7 @@ export const BASE_CONFIG = {
   basePath: "/",
   notFoundPattern: "not-found",
   serverErrorPattern: "error",
+  layoutPattern: "layout",
   strict: false,
   baseDir: _process.cwd(),
   extensions: [],
@@ -18,6 +19,7 @@ export interface ServerConfig<E extends Env, B extends string>
   basePath?: B;
   notFoundPattern?: string;
   serverErrorPattern?: string;
+  layoutPattern?: string;
   baseDir?: string;
   extensions?: Extension<E, B>[];
 }

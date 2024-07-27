@@ -101,24 +101,29 @@ export function createRoutes<B extends string>(
         isError: new RegExp(
           `${config.serverErrorPattern}\.(${EXTENSIONS.join("|")})$`
         ).test(route.name),
+        isLayout: new RegExp(
+          `${config.layoutPattern}\.(${EXTENSIONS.join("|")})$`
+        ).test(route.name),
       };
     })
     .sort(
       (a, b) =>
         b.handlerPath.split("/").length - a.handlerPath.split("/").length
-    ).sort((a, b) =>
+    )
+    .sort((a, b) =>
       a.handlerPath.split("/").length === b.handlerPath.split("/").length
         ? (a.handlerPath.split("/").pop() ?? "").startsWith(":")
           ? 1
           : 0
         : 0
-    ).sort((a, b) =>
+    )
+    .sort((a, b) =>
       a.handlerPath.split("/").length === b.handlerPath.split("/").length
         ? a.handlerPath.endsWith("*")
           ? 1
           : 0
         : 0
-    )
+    );
 }
 
 export async function getRoutes(dir: string, files: string[] = []) {
@@ -143,4 +148,5 @@ export interface Route {
   modulePath: string;
   isNotFound: boolean;
   isError: boolean;
+  isLayout: boolean;
 }

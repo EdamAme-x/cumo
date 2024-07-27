@@ -5,6 +5,7 @@ import {
   type ServerConfig,
 } from "./server-config.ts";
 import type { Env, BlankSchema, BlankEnv, Schema } from "@hono/hono/types";
+import { jsxRenderer, useRequestContext } from "@hono/hono/jsx-renderer";
 import { createRoutes, getRoutes } from "./utils/create-routes.ts";
 import { join } from "node:path";
 import { createContext, createResponse } from "./utils/create-response.ts";
@@ -99,37 +100,51 @@ export class ServerHandler<E extends Env = BlankEnv, B extends string = "/"> {
 
       if (route.isNotFound) {
         this.hono.notFound((c) => {
+          const ctx = createContext(c);
+
           const method = c.req.method;
           if (module[method]) {
-            return createResponse(module[method](createContext(c)));
+            return createResponse(module[method](ctx), ctx);
           }
           if (module.default) {
-            return createResponse(module.default(createContext(c)));
+            return createResponse(module.default(ctx), ctx);
           }
 
           return c.notFound();
         });
       } else if (route.isError) {
         this.hono.onError((err, c) => {
+          const ctx = createContext(c);
+
           const method = c.req.method;
           if (module[method]) {
-            return createResponse(module[method](createContext(c), err));
+            return createResponse(module[method](ctx, err), ctx);
           }
           if (module.default) {
-            return createResponse(module.default(createContext(c), err));
+            return createResponse(module.default(ctx, err), ctx);
           }
 
           return c.notFound();
         });
+      } else if (route.isLayout) {
+        this.hono.use(
+          route.handlerPath.split("/").reverse().slice(1).reverse().join("/") +
+            "*",
+          jsxRenderer(({ children }) => {
+            return module.default(children, createContext(useRequestContext()));
+          })
+        );
       } else {
         this.hono.all(route.handlerPath, (c) => {
+          const ctx = createContext(c);
+
           const method = c.req.method;
 
           if (module[method]) {
-            return createResponse(module[method](createContext(c)));
+            return createResponse(module[method](ctx), ctx);
           }
           if (module.default) {
-            return createResponse(module.default(createContext(c)));
+            return createResponse(module.default(ctx), ctx);
           }
 
           return c.notFound();
