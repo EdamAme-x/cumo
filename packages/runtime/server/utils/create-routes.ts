@@ -85,8 +85,8 @@ export function createRoutes<B extends string>(
     };
   });
 
-  return formattedRoutes
-    .map((route) => {
+  return sortRoutes(
+    formattedRoutes.map((route) => {
       return {
         handlerPath: parseHandlerPath(
           route.parentPath.replace(rotuesPath, ""),
@@ -106,6 +106,15 @@ export function createRoutes<B extends string>(
         ).test(route.name),
       };
     })
+  );
+}
+
+function sortRoutes(routes: Route[]): Route[] {
+  const BACK = -1;
+  const SAME = 0;
+  const FRONT = 1;
+
+  return routes
     .sort(
       (a, b) =>
         b.handlerPath.split("/").length - a.handlerPath.split("/").length
@@ -113,17 +122,18 @@ export function createRoutes<B extends string>(
     .sort((a, b) =>
       a.handlerPath.split("/").length === b.handlerPath.split("/").length
         ? (a.handlerPath.split("/").pop() ?? "").startsWith(":")
-          ? 1
-          : 0
-        : 0
+          ? FRONT
+          : SAME
+        : SAME
     )
     .sort((a, b) =>
       a.handlerPath.split("/").length === b.handlerPath.split("/").length
         ? a.handlerPath.endsWith("*")
-          ? 1
-          : 0
-        : 0
-    );
+          ? FRONT
+          : SAME
+        : SAME
+    )
+    .sort((a) => (a.isLayout ? BACK : SAME));
 }
 
 export async function getRoutes(dir: string, files: string[] = []) {
