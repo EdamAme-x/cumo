@@ -126,13 +126,13 @@ export class ServerHandler<E extends Env = BlankEnv, B extends string = "/"> {
 
           return c.notFound();
         });
-      } else if (route.isLayout) {
+      } else if (route.isLayout && module.default) {
         this.hono.use(
-          route.handlerPath.split("/").reverse().slice(1).reverse().join("/") +
-            "*",
-          jsxRenderer(({ children }) => {
-            return module.default(children, createContext(useRequestContext()));
-          })
+          route.handlerPath,
+          async (c, next) => {
+            c.setRenderer(children => c.html(module.default(children, createContext(c))));
+            await next();
+          }
         );
       } else {
         this.hono.all(route.handlerPath, (c) => {

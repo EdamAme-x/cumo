@@ -36,7 +36,7 @@ export async function createResponse(
   }
 
   if (typeof value === "object") {
-    return c.render(value.toString());
+    return c.render(value as unknown as string);
   }
 
   return c.notFound();

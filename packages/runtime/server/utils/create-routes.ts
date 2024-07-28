@@ -21,7 +21,7 @@ const REGEXP_ALL_ROUTE = /^\[\.\.\.[a-zA-Z0-9-_]+\]$/;
 const REGEXP_INDEX_ROUTE = new RegExp(`^index\.[a-zA-Z0-9-_]+$`);
 const REGEXP_EXT_ROUTE = new RegExp(`\.[a-zA-Z0-9-_]+$`);
 
-function parseHandlerPath(parentPath: string, routeName: string): string {
+function parseHandlerPath<B extends string>(parentPath: string, routeName: string, config: InternalServerConfig<any, B>): string {
   const parsedParentPath = parentPath
     .split("/")
     .map((dirName) => {
@@ -45,7 +45,8 @@ function parseHandlerPath(parentPath: string, routeName: string): string {
 
   const parsedRouteName = routeName
     .replace(REGEXP_INDEX_ROUTE, "")
-    .replace(REGEXP_EXT_ROUTE, "");
+    .replace(REGEXP_EXT_ROUTE, "")
+    .replace(new RegExp(`^${config.layoutPattern}$`), "*");
 
   const handlerPath = [
     ...parsedParentPath,
@@ -88,9 +89,10 @@ export function createRoutes<B extends string>(
   return sortRoutes(
     formattedRoutes.map((route) => {
       return {
-        handlerPath: parseHandlerPath(
+        handlerPath: parseHandlerPath<B>(
           route.parentPath.replace(rotuesPath, ""),
-          route.name
+          route.name,
+          config
         ),
         modulePath: normlizePath(
           join(normlizePath(route.parentPath, false), route.name)
@@ -139,7 +141,8 @@ function sortRoutes(routes: Route[]): Route[] {
 export async function getRoutes(dir: string, files: string[] = []) {
   const paths = await fs.promises.readdir(dir);
   const dirs: string[] = [];
-  for (const path of paths) {
+  for (let i = 0, len = paths.length; i < len; i++) {
+    const path = paths[i];
     const stats = fs.statSync(`${dir}/${path}`);
     if (stats.isDirectory()) {
       dirs.push(`${dir}/${path}`);
@@ -147,7 +150,8 @@ export async function getRoutes(dir: string, files: string[] = []) {
       files.push(`${dir}/${path}`);
     }
   }
-  for (const d of dirs) {
+  for (let i = 0, len = dirs.length; i < len; i++) {
+    const d = dirs[i];
     files = await getRoutes(d, files);
   }
   return files;
