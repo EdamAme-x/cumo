@@ -21,7 +21,11 @@ const REGEXP_ALL_ROUTE = /^\[\.\.\.[a-zA-Z0-9-_]+\]$/;
 const REGEXP_INDEX_ROUTE = new RegExp(`^index\.[a-zA-Z0-9-_]+$`);
 const REGEXP_EXT_ROUTE = new RegExp(`\.[a-zA-Z0-9-_]+$`);
 
-function parseHandlerPath<B extends string>(parentPath: string, routeName: string, config: InternalServerConfig<any, B>): string {
+function parseHandlerPath<B extends string>(
+  parentPath: string,
+  routeName: string,
+  config: InternalServerConfig<any, B>
+): string {
   const parsedParentPath = parentPath
     .split("/")
     .map((dirName) => {
